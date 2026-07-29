@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y curl gnupg
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 0x1657198823e52a61  && \
     echo "deb http://download.zerotier.com/debian/buster buster main" > /etc/apt/sources.list.d/zerotier.list
 RUN apt-get update && apt-get install -y zerotier-one=1.8.6
-COPY ext/installfiles/linux/zerotier-containerized/main.sh /var/lib/zerotier-one/main.sh
+RUN printf '#!/bin/sh\nif [ ! -c /dev/net/tun ]; then\n  mkdir -p /dev/net\n  mknod /dev/net/tun c 10 200\n  chmod 0666 /dev/net/tun\nfi\nexec "$@"\n' > /var/lib/zerotier-one/main.sh
 
 FROM debian:buster-slim
 LABEL version="1.8.6"
