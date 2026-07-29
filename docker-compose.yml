@@ -1,12 +1,6 @@
-version: '3.8'
-
 services:
   zerotier:
-    image: zerotier/zerotier-one:latest
-    # Jika ingin build dari Dockerfile lokal, hapus `image:` dan gunakan `build:` di bawah:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+    image: zerotier/zerotier:latest
     container_name: zerotier-one
     restart: unless-stopped
     network_mode: host
