@@ -7,7 +7,6 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    devices:
-      - /dev/net/tun:/dev/net/tun
+      - SYS_ADMIN
     volumes:
       - ./zerotier-data:/var/lib/zerotier-one
