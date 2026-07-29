@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  zerotier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Jika ingin menggunakan official image tanpa build local Dockerfile, gunakan line berikut:
+    # image: zerotier/zerotier-one:latest
+    container_name: zerotier-one
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./zerotier-data:/var/lib/zerotier-one
+
+# Jika ingin menggunakan Named Volume, hapus comment di bawah dan sesuaikan di bagian volumes service
+# volumes:
+#   zerotier-data:
